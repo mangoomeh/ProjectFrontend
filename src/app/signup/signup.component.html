@@ -1,0 +1,70 @@
+<div
+  class="container border rounded-3 p-5 position-absolute top-50 start-50 translate-middle"
+>
+  <h1 class="text-center mb-4">Create Account</h1>
+  <form
+    [ngClass]="{ 'was-validated': validated }"
+    class="needs-validation row g-3"
+    novalidate
+  >
+    <div class="col-md-12">
+      <input
+        type="text"
+        class="form-control"
+        id="fullName"
+        placeholder="Full name"
+        required
+      />
+      <div class="invalid-feedback">This field is required.</div>
+    </div>
+    <div class="col-md-12">
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        placeholder="Email address"
+        required
+      />
+      <div class="invalid-feedback">This field is required.</div>
+    </div>
+    <div class="col-md-12">
+      <input
+        type="text"
+        class="form-control"
+        id="password"
+        placeholder="Password"
+        required
+      />
+      <div class="invalid-feedback">This field is required.</div>
+    </div>
+    <div class="col-md-12">
+      <input
+        type="text"
+        class="form-control"
+        id="confirmPassword"
+        placeholder="Confirm Password"
+        required
+      />
+      <div class="invalid-feedback">This field is required.</div>
+    </div>
+    <div class="col-md-12">
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Role</option>
+        <option value="1">Blogger</option>
+        <option value="2">Reader</option>
+      </select>
+    </div>
+    <div class="col-12">
+      <button
+        type="submit"
+        class="btn btn-primary w-100"
+        (click)="onSubmit($event)"
+      >
+        Create account
+      </button>
+    </div>
+    <div class="text-center">
+      Already have an account? <a routerLink="/login">Login</a>
+    </div>
+  </form>
+</div>
