@@ -2,15 +2,15 @@
 <!-- Side Bar -->
 <div [ngClass]="{ 'open-sidebar': sideBarIsOpen }" class="sidebar">
   <div class="bg-dark p-4" style="width: 250px; height: 100vh">
-    <button class="btn btn-dark w-100 mb-3" style="margin-top: 50px">
+    <button routerLink="discover" class="btn btn-dark w-100 mb-3" style="margin-top: 50px">
       Discover
     </button>
-    <button class="btn btn-dark w-100 mb-3">Profile</button>
+    <button routerLink="profile" class="btn btn-dark w-100 mb-3">Profile</button>
     <button class="btn btn-dark w-100 mb-3">Dashboard</button>
   </div>
 </div>
 <!-- NavBar -->
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar fixed-top navbar-dark bg-dark">
   <div class="container-fluid">
     <div>
       <button (click)="toggleSideBar()" class="navbar-toggler" type="button">
