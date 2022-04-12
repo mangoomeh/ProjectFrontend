@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RoleService } from '../shared/services/role.service';
 import { UserService } from '../shared/services/user.service';
 
@@ -13,11 +14,13 @@ export class SignupComponent implements OnInit {
   public signupForm!: FormGroup;
   public roleList: any;
   public imgUrl: string | ArrayBuffer | null = '';
+  public imgFile: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private roleService: RoleService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -41,10 +44,13 @@ export class SignupComponent implements OnInit {
     }
     this.validated = false;
     let formData = new FormData();
-    formData.append("UserDetails", JSON.stringify(this.signupForm.value))
+    formData.append("UserDetails", JSON.stringify(this.signupForm.value));
+    formData.append("UserImage", this.imgFile)
     this.userService.addUser(formData).subscribe({
       next: (res) => {
         console.log(res);
+        alert("Account created!");
+        this.router.navigate(['/login'])
       }
     });
   }
@@ -66,11 +72,12 @@ export class SignupComponent implements OnInit {
       // return;
     }
 
+    this.imgFile = file;
+
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (_event) => {
       this.imgUrl = reader.result;
     };
-    console.log(this.signupForm.value);
   }
 }

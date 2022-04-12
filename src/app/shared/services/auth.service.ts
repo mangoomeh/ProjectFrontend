@@ -13,11 +13,7 @@ export class AuthService {
   }
 
   login(loginObj: any) {
-    return this.http.post<any>(this.baseApiUrl + '/login', loginObj).subscribe({
-      next: (res) => {
-        localStorage.setItem('jwt_token', res.token);
-      },
-    });
+    return this.http.post<any>(this.baseApiUrl + '/login', loginObj);
   }
 
   private getToken() {

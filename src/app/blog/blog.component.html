@@ -1,0 +1,27 @@
+<!-- Background -->
+<!-- Side Bar -->
+<div [ngClass]="{ 'open-sidebar': sideBarIsOpen }" class="sidebar">
+  <div class="bg-dark p-4" style="width: 250px; height: 100vh">
+    <button class="btn btn-dark w-100 mb-3" style="margin-top: 50px">
+      Discover
+    </button>
+    <button class="btn btn-dark w-100 mb-3">Profile</button>
+    <button class="btn btn-dark w-100 mb-3">Dashboard</button>
+  </div>
+</div>
+<!-- NavBar -->
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <div>
+      <button (click)="toggleSideBar()" class="navbar-toggler" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <span class="navbar-brand m-4">da.gloB</span>
+    </div>
+    <button class="btn btn-dark border">Logout</button>
+  </div>
+</nav>
+<!-- Content -->
+<div class="content" [ngClass]="{ 'open-content': sideBarIsOpen }">
+  <router-outlet></router-outlet>
+</div>

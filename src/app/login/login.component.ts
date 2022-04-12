@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +30,13 @@ export class LoginComponent implements OnInit {
     this.validated = true;
     if (this.loginForm.valid) {
       console.log('loginForm.value', this.loginForm.value);
-      this.authService.login(this.loginForm.value);
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (res) => {
+          console.log(res);
+          localStorage.setItem('jwt_token', res.token);
+          this.router.navigate(['/blog']);
+        },
+      });
     } else {
       alert('Invalid Form');
     }
