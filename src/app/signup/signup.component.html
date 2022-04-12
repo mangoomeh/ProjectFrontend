@@ -1,70 +1,91 @@
-<div
-  class="container border rounded-3 p-5 position-absolute top-50 start-50 translate-middle"
->
-  <h1 class="text-center mb-4">Create Account</h1>
-  <form
-    [ngClass]="{ 'was-validated': validated }"
-    class="needs-validation row g-3"
-    novalidate
+<div class="background">
+  <div
+    class="bg-white container border rounded-3 p-5 position-absolute top-50 start-50 translate-middle"
   >
-    <div class="col-md-12">
+    <form
+      [ngClass]="{ 'was-validated': validated }"
+      [formGroup]="signupForm"
+      class="needs-validation row g-3"
+      novalidate
+    >
+      <div class="col-sm-12 d-flex justify-content-center">
+        <img
+          class="img-fluid img-thumbnail"
+          [src]="
+            imgUrl
+              ? imgUrl
+              : 'https://cdn-icons.flaticon.com/png/512/1144/premium/1144760.png?token=exp=1649739593~hmac=230231ac8bf7359fd8a751a51d3bff3e'
+          "
+          style="width: 120px; height: 120px; border-radius: 50%"
+          alt=""
+        /><br />
+        <div class="form-group">
+          <label for="file-input">
+            <i class="fa-solid fa-square-pen"></i>
+          </label>
+        </div>
+      </div>
       <input
-        type="text"
-        class="form-control"
-        id="fullName"
-        placeholder="Full name"
-        required
+        (change)="loadProfileImage($event)"
+        id="file-input"
+        style="display: none"
+        type="file"
+        accept="image/*"
       />
-      <div class="invalid-feedback">This field is required.</div>
-    </div>
-    <div class="col-md-12">
-      <input
-        type="text"
-        class="form-control"
-        id="email"
-        placeholder="Email address"
-        required
-      />
-      <div class="invalid-feedback">This field is required.</div>
-    </div>
-    <div class="col-md-12">
-      <input
-        type="text"
-        class="form-control"
-        id="password"
-        placeholder="Password"
-        required
-      />
-      <div class="invalid-feedback">This field is required.</div>
-    </div>
-    <div class="col-md-12">
-      <input
-        type="text"
-        class="form-control"
-        id="confirmPassword"
-        placeholder="Confirm Password"
-        required
-      />
-      <div class="invalid-feedback">This field is required.</div>
-    </div>
-    <div class="col-md-12">
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Role</option>
-        <option value="1">Blogger</option>
-        <option value="2">Reader</option>
-      </select>
-    </div>
-    <div class="col-12">
-      <button
-        type="submit"
-        class="btn btn-primary w-100"
-        (click)="onSubmit($event)"
-      >
-        Create account
-      </button>
-    </div>
-    <div class="text-center">
-      Already have an account? <a routerLink="/login">Login</a>
-    </div>
-  </form>
+      <div class="col-md-12">
+        <input
+          formControlName="fullName"
+          type="text"
+          class="form-control"
+          id="fullName"
+          placeholder="Full name"
+          required
+        />
+        <div class="invalid-feedback">This field is required.</div>
+      </div>
+      <div class="col-md-12">
+        <input
+          formControlName="email"
+          type="text"
+          class="form-control"
+          id="email"
+          placeholder="Email address"
+          required
+        />
+        <div class="invalid-feedback">This field is required.</div>
+      </div>
+      <div class="col-md-12">
+        <input
+          formControlName="password"
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Password"
+          required
+        />
+        <div class="invalid-feedback">This field is required.</div>
+      </div>
+      <div class="col-md-12">
+        <select
+          formControlName="roleId"
+          class="form-select"
+          aria-label="Default select example"
+          required
+        >
+          <option selected value="">Select Role</option>
+          <ng-container *ngFor="let role of roleList">
+            <option [ngValue]="role.id">{{ role.roleName }}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary w-100" (click)="signup()">
+          Create account
+        </button>
+      </div>
+      <div class="text-center">
+        Already have an account? <a routerLink="/login">Login</a>
+      </div>
+    </form>
+  </div>
 </div>

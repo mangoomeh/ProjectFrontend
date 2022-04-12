@@ -1,46 +1,48 @@
-<div
-  class="container border rounded-3 p-5 position-absolute top-50 start-50 translate-middle"
->
-  <h1 class="text-center mb-4">Login</h1>
-  <form
-    [ngClass]="{ 'was-validated': validated }"
-    class="needs-validation form-row"
-    [formGroup]="loginForm"
-    novalidate
+<div class="background">
+  <div
+    class="container border rounded-3 p-5 position-absolute top-50 start-50 translate-middle"
   >
-    <div class="mb-3 mt-3">
-      <input
-        type="text"
-        class="form-control"
-        id="email"
-        required
-        placeholder="Email"
-        formControlName="Email"
-      />
-      <div class="invalid-feedback">This field is required.</div>
+    <h1 class="text-center mb-4">Login</h1>
+    <form
+      [ngClass]="{ 'was-validated': validated }"
+      class="needs-validation form-row"
+      [formGroup]="loginForm"
+      novalidate
+    >
+      <div class="mb-3 mt-3">
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          required
+          placeholder="Email"
+          formControlName="Email"
+        />
+        <div class="invalid-feedback">This field is required.</div>
+      </div>
+      <div class="mb-3 mt-3">
+        <input
+          type="text"
+          class="form-control"
+          id="password"
+          required
+          placeholder="Password"
+          formControlName="Password"
+        />
+        <div class="invalid-feedback">This field is required.</div>
+      </div>
+      <div class="mb-3">
+        <button
+          class="btn btn-primary w-100"
+          (click)="onSubmit($event)"
+          type="submit"
+        >
+          Continue
+        </button>
+      </div>
+    </form>
+    <div class="text-center">
+      No account? <a routerLink="/signup">Create account</a>
     </div>
-    <div class="mb-3 mt-3">
-      <input
-        type="text"
-        class="form-control"
-        id="password"
-        required
-        placeholder="Password"
-        formControlName="Password"
-      />
-      <div class="invalid-feedback">This field is required.</div>
-    </div>
-    <div class="mb-3">
-      <button
-        class="btn btn-primary w-100"
-        (click)="onSubmit($event)"
-        type="submit"
-      >
-        Continue
-      </button>
-    </div>
-  </form>
-  <div class="text-center">
-    No account? <a routerLink="/signup">Create account</a>
   </div>
 </div>
