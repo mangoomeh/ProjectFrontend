@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlogComponent } from './blog.component';
 import { DiscoverComponent } from './discover/discover.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -10,7 +11,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'discover', pathMatch: 'full' },
       { path: 'discover', component: DiscoverComponent },
-      { path: 'profile', component: DiscoverComponent },
+      { path: 'profile', component: ProfileComponent },
     ],
   },
 ];
