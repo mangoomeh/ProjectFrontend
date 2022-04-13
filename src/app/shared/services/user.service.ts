@@ -14,4 +14,12 @@ export class UserService {
   addUser(formData: any) {
     return this.http.post<any>(this.baseApiUrl, formData);
   }
+
+  getUser(id: number) {
+    return this.http.get<any>(this.baseApiUrl + `/${id}`);
+  }
+
+  updateUser(id: number, formData: any) {
+    return this.http.put<any>(this.baseApiUrl + `/${id}`, formData);
+  }
 }
