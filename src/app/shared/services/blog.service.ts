@@ -23,4 +23,8 @@ export class BlogService {
   addBlog(blogObj: any) {
     return this.http.post<any>(this.baseApiUrl, blogObj);
   }
+
+  updateBlog(formData: any) {
+    return this.http.put<any>(this.baseApiUrl, formData);
+  }
 }
