@@ -4,21 +4,117 @@
       <div class="d-flex">
         <img
           class="me-5"
-          [src]="
+          [src]="userDetails?.profileImgUrl ? baseApiUrl + userDetails.profileImgUrl :
             'https://cdn-icons.flaticon.com/png/512/1144/premium/1144760.png?token=exp=1649739593~hmac=230231ac8bf7359fd8a751a51d3bff3e'
           "
           style="width: 120px; height: 120px; border-radius: 50%"
           alt=""
         />
         <div>
-          <h3>John Doe</h3>
-          <p class="text-muted">Blogger</p>
-          <p>johndoe@gmail.com</p>
+          <h3>{{userDetails?.fullName}}</h3>
+          <p class="text-muted">{{userRole}}</p>
+          <p>{{userDetails?.email}}</p>
         </div>
       </div>
     </div>
     <div class="card-body text-end">
-      <button class="btn btn-dark">Edit</button>
+      <button
+        class="btn btn-dark"
+        data-bs-toggle="modal"
+        data-bs-target="#editUser"
+      >
+        Edit
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="editUser"
+  tabindex="-1"
+  aria-labelledby="editUser"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editUserModalLabel">Update Profile</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form class="needs-validation row g-3" novalidate [formGroup]="editUserForm">
+          <div class="col-sm-12 d-flex justify-content-center">
+            <img
+              class="img-fluid img-thumbnail"
+              [src]="
+                imgUrl
+                  ? imgUrl
+                  : 'https://cdn-icons.flaticon.com/png/512/1144/premium/1144760.png?token=exp=1649739593~hmac=230231ac8bf7359fd8a751a51d3bff3e'
+              "
+              style="width: 120px; height: 120px; border-radius: 50%"
+              alt=""
+            /><br />
+            <div class="form-group">
+              <label for="file-input">
+                <i class="fa-solid fa-square-pen"></i>
+              </label>
+            </div>
+          </div>
+          <input
+            (change)="loadProfileImage($event)"
+            id="file-input"
+            style="display: none"
+            type="file"
+            accept="image/*"
+          />
+          <div class="col-md-12">
+            <input
+              formControlName="fullName"
+              type="text"
+              class="form-control"
+              id="fullName"
+              placeholder="Full name"
+              required
+            />
+            <div class="invalid-feedback">This field is required.</div>
+          </div>
+          <div class="col-md-12">
+            <input
+              formControlName="email"
+              type="text"
+              class="form-control"
+              id="email"
+              placeholder="Email address"
+              required
+            />
+            <div class="invalid-feedback">This field is required.</div>
+          </div>
+          <!-- <div class="col-md-12">
+            <input
+              formControlName="password"
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Password"
+              required
+            />
+            <div class="invalid-feedback">This field is required.</div>
+          </div> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" (click)="onSaveChanges()" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
   </div>
 </div>
