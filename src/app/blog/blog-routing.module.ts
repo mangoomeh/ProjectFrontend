@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BlogEditorComponent } from './blog-editor/blog-editor.component';
 import { BlogComponent } from './blog.component';
 import { DiscoverComponent } from './discover/discover.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'discover', pathMatch: 'full' },
       { path: 'discover', component: DiscoverComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: 'blogEditor/:id', component: BlogEditorComponent },
     ],
   },
 ];

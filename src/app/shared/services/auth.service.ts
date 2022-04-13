@@ -7,7 +7,10 @@ import { BaseService } from './base.service';
 })
 export class AuthService {
   baseApiUrl: string;
-  constructor(private http: HttpClient, private baseService: BaseService) {
+  constructor(
+    private http: HttpClient,
+    private baseService: BaseService,
+  ) {
     this.baseApiUrl = baseService.baseApiUrl + '/api/Auth';
   }
 

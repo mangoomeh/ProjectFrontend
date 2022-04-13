@@ -1,0 +1,21 @@
+<div class="container p-5">
+  <form>
+    <input class="form-control col-12 mb-4" placeholder="Title" />
+    <textarea
+      class="form-control col-12 mb-4"
+      placeholder="Description"
+    ></textarea>
+    <img
+      [src]="
+        localBlogImgUrl
+          ? localBlogImgUrl
+          : 'https://cdn-icons-png.flaticon.com/512/739/739249.png'
+      "
+      class="img-thumbnail mb-2"
+      style="width: 100px; height: 100px"
+    />
+    <input (change)="loadLocalBlogImg($event)" class="form-control mb-4" type="file" id="formFile" />
+  </form>
+
+  <ckeditor [(ngModel)]="blogPost" [editor]="Editor"></ckeditor>
+</div>

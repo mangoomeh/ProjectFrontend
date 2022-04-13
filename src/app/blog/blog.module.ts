@@ -5,10 +5,23 @@ import { BlogRoutingModule } from './blog-routing.module';
 import { BlogComponent } from './blog.component';
 import { DiscoverComponent } from './discover/discover.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BlogEditorComponent } from './blog-editor/blog-editor.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
-  declarations: [BlogComponent, DiscoverComponent, ProfileComponent,],
-  imports: [CommonModule, BlogRoutingModule, ReactiveFormsModule],
+  declarations: [
+    BlogComponent,
+    DiscoverComponent,
+    ProfileComponent,
+    BlogEditorComponent,
+  ],
+  imports: [
+    CommonModule,
+    BlogRoutingModule,
+    ReactiveFormsModule,
+    CKEditorModule,
+    FormsModule
+  ],
 })
 export class BlogModule {}

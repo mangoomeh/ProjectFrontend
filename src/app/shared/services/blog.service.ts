@@ -15,4 +15,8 @@ export class BlogService {
   getBlogs() {
     return this.http.get<any>(this.baseApiUrl);
   }
+
+  getBlog(id: number) {
+    return this.http.get<any>(this.baseApiUrl + `/${id}`)
+  }
 }
