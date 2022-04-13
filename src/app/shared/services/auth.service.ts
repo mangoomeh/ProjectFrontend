@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import * as moment from 'moment';
 import { BaseService } from './base.service';
 
 @Injectable({
@@ -14,6 +13,22 @@ export class AuthService {
 
   login(loginObj: any) {
     return this.http.post<any>(this.baseApiUrl + '/login', loginObj);
+  }
+
+  getDecodedJWT() {
+    const token = this.getToken();
+    const decodedJWT = JSON.parse(window.atob(token?.split('.')[1]));
+    console.log(decodedJWT);
+    return decodedJWT;
+  }
+
+  getUserId() {
+    const decodedJWT = this.getDecodedJWT();
+    return decodedJWT.UserId;
+  }
+
+  getUserRole() {
+    return this.getDecodedJWT().Role;
   }
 
   private getToken() {
