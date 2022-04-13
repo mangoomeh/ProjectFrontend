@@ -17,6 +17,10 @@ export class BlogService {
   }
 
   getBlog(id: number) {
-    return this.http.get<any>(this.baseApiUrl + `/${id}`)
+    return this.http.get<any>(this.baseApiUrl + `/${id}`);
+  }
+
+  addBlog(blogObj: any) {
+    return this.http.post<any>(this.baseApiUrl, blogObj);
   }
 }
