@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BlogEditorComponent } from './blog-editor/blog-editor.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { OneBlogComponent } from './one-blog/one-blog.component';
+import { MyBlogsComponent } from './my-blogs/my-blogs.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { OneBlogComponent } from './one-blog/one-blog.component';
     ProfileComponent,
     BlogEditorComponent,
     OneBlogComponent,
+    MyBlogsComponent,
   ],
   imports: [
     CommonModule,

@@ -20,6 +20,10 @@ export class BlogService {
     return this.http.get<any>(this.baseApiUrl + `/${id}`);
   }
 
+  getBlogByUserId(id: number) {
+    return this.http.get<any>(this.baseApiUrl + `/UserId/${id}`);
+  }
+
   addBlog(blogObj: any) {
     return this.http.post<any>(this.baseApiUrl, blogObj);
   }
