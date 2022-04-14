@@ -32,4 +32,10 @@ export class BlogService {
     return this.http.delete<any>(this.baseApiUrl + `/${id}`);
   }
 
+  postComment(commentObj: any) {
+    return this.http.post<any>(
+      this.baseService.baseApiUrl + '/api/Comments',
+      commentObj
+    );
+  }
 }
