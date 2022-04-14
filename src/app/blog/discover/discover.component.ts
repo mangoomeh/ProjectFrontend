@@ -32,4 +32,13 @@ export class DiscoverComponent implements OnInit {
     const dateTime = new Date(updatedDate);
     return 'Updated: ' + dateTime.toLocaleString();
   }
+
+  pseudoHtmlParser(htmlString: string) {
+    return (
+      htmlString
+        .slice(0, 500)
+        .replace(/<\/?[^>]+(>|$)/g, '\n')
+        .slice(0, 400) + '...'
+    );
+  }
 }
