@@ -9,10 +9,9 @@
     >
       Discover
     </button>
-    <button routerLink="profile" class="btn btn-dark w-100 mb-3">
+    <button routerLink="profile" class="btn btn-outline-light w-100 mb-3">
       Profile
     </button>
-    <button class="btn btn-dark w-100 mb-3">Dashboard</button>
   </div>
 </div>
 <!-- NavBar -->
@@ -25,7 +24,9 @@
       <span class="navbar-brand m-4">da.gloB</span>
     </div>
     <div>
-      <button (click)="createNewBlogPost()" class="btn btn-success me-3">Create New Post</button>
+      <button (click)="createNewBlogPost()" class="btn btn-success me-3">
+        Create New Post
+      </button>
       <button (click)="logout()" class="btn btn-outline-light">Logout</button>
     </div>
   </div>
@@ -34,4 +35,3 @@
 <div class="content" [ngClass]="{ 'open-content': sideBarIsOpen }">
   <router-outlet></router-outlet>
 </div>
-
