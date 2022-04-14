@@ -1,77 +1,79 @@
-<div class="container mt-5 p-5 bg-light rounded-3">
-  <div class="mb-2">
-    <!-- user info -->
-    <div class="d-flex justify-content-between">
-      <div class="d-flex align-items-center">
-        <img
-          [src]="
-            blogDetails?.user?.profileImgUrl
-              ? baseApiUrl + '/' + blogDetails?.user?.profileImgUrl
-              : 'https://cdn-icons-png.flaticon.com/512/847/847969.png'
-          "
-          style="width: 50px; height: 50px; border-radius: 50%"
-        />
-        <div class="ms-2 text-muted" style="font-size: 14px">
-          <div>
-            {{ blogDetails?.user?.fullName }}
-          </div>
-          <div>
-            {{ dateParser(blogDetails?.createdTime) }}
-          </div>
-        </div>
-      </div>
-
-      <!-- edit / delete options -->
-      <div *ngIf="isAuthor">
-        <button
-          routerLink="/blog/blogEditor/{{ blogDetails.id }}"
-          class="btn btn-outline-dark"
-        >
-          Edit Post
-        </button>
-      </div>
-    </div>
-  </div>
-  <!-- blog content -->
-  <div class="mt-4 border-bottom">
-    <h1>{{ blogDetails?.title }}</h1>
-    <p class="text-muted">{{ blogDetails?.description }}</p>
-    <img
-      *ngIf="blogDetails?.user?.profileImgUrl"
-      [src]="
-        blogDetails?.blogImgUrl && baseApiUrl + '/' + blogDetails?.blogImgUrl
-      "
-      class="w-100 mb-5"
-    />
-    <div class="mb-5" [innerHTML]="blogDetails?.content"></div>
-  </div>
-  <!-- comment section -->
-  <div class="mt-4">
-    <form (submit)="postComment()">
-      <input
-        [(ngModel)]="comment"
-        class="form-control w-100 mb-4"
-        placeholder="What are you thoughts?"
-        name="comment"
-      />
-    </form>
-    <div>Comments:</div>
-    <div class="card mb-2" *ngFor="let comment of blogDetails?.comments">
-      <div class="card-body">
-        <div class="mb-2">
+<div class="container p-5">
+  <div class="container p-5 bg-white rounded-3">
+    <div class="mb-2">
+      <!-- user info -->
+      <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center">
           <img
             [src]="
-              comment.user.profileImgUrl
-                ? baseApiUrl + '/' + comment?.user.profileImgUrl
+              blogDetails?.user?.profileImgUrl
+                ? baseApiUrl + '/' + blogDetails?.user?.profileImgUrl
                 : 'https://cdn-icons-png.flaticon.com/512/847/847969.png'
             "
-            style="width: 25px; height: 25px; border-radius: 50%"
+            style="width: 50px; height: 50px; border-radius: 50%"
           />
-          <span class="ms-2" style="font-size: 13px">{{
-            comment.user.fullName
-          }}</span>
+          <div class="ms-2 text-muted" style="font-size: 14px">
+            <div>
+              {{ blogDetails?.user?.fullName }}
+            </div>
+            <div>
+              {{ dateParser(blogDetails?.createdTime) }}
+            </div>
+          </div>
         </div>
-        <div>{{ comment.content }}</div>
+
+        <!-- edit / delete options -->
+        <div *ngIf="isAuthor">
+          <button
+            routerLink="/blog/blogEditor/{{ blogDetails.id }}"
+            class="btn btn-outline-dark"
+          >
+            Edit Post
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- blog content -->
+    <div class="mt-4 border-bottom">
+      <h1>{{ blogDetails?.title }}</h1>
+      <p class="text-muted">{{ blogDetails?.description }}</p>
+      <img
+        *ngIf="blogDetails?.user?.profileImgUrl"
+        [src]="
+          blogDetails?.blogImgUrl && baseApiUrl + '/' + blogDetails?.blogImgUrl
+        "
+        class="w-100 mb-5"
+      />
+      <div class="mb-5" [innerHTML]="blogDetails?.content"></div>
+    </div>
+    <!-- comment section -->
+    <div class="mt-4">
+      <form (submit)="postComment()">
+        <input
+          [(ngModel)]="comment"
+          class="form-control w-100 mb-4"
+          placeholder="What are you thoughts?"
+          name="comment"
+        />
+      </form>
+      <div>Comments:</div>
+      <div class="card mb-2" *ngFor="let comment of blogDetails?.comments">
+        <div class="card-body">
+          <div class="mb-2">
+            <img
+              [src]="
+                comment.user.profileImgUrl
+                  ? baseApiUrl + '/' + comment?.user.profileImgUrl
+                  : 'https://cdn-icons-png.flaticon.com/512/847/847969.png'
+              "
+              style="width: 25px; height: 25px; border-radius: 50%"
+            />
+            <span class="ms-2" style="font-size: 13px">{{
+              comment.user.fullName
+            }}</span>
+          </div>
+          <div>{{ comment.content }}</div>
+        </div>
       </div>
     </div>
   </div>
