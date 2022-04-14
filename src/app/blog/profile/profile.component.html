@@ -5,17 +5,17 @@
         <img
           class="me-5"
           [src]="
-            userDetails?.profileImgUrl
-              ? baseApiUrl + userDetails.profileImgUrl
+            fetchedUserObj?.profileImgUrl
+              ? baseApiUrl + fetchedUserObj?.profileImgUrl
               : 'https://cdn-icons.flaticon.com/png/512/1144/premium/1144760.png?token=exp=1649739593~hmac=230231ac8bf7359fd8a751a51d3bff3e'
           "
           style="width: 120px; height: 120px; border-radius: 50%"
           alt=""
         />
         <div>
-          <h3>{{ userDetails?.fullName }}</h3>
-          <p class="text-muted">{{ userRole }}</p>
-          <p>{{ userDetails?.email }}</p>
+          <h3>{{ fetchedUserObj?.fullName }}</h3>
+          <p class="text-muted">{{ roleName }}</p>
+          <p>{{ fetchedUserObj?.email }}</p>
         </div>
       </div>
     </div>
@@ -44,6 +44,7 @@
       <div class="modal-header">
         <h5 class="modal-title" id="editUserModalLabel">Update Profile</h5>
         <button
+          id="close-modal"
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
@@ -60,10 +61,8 @@
             <img
               class="img-fluid img-thumbnail"
               [src]="
-                imgUrl
-                  ? imgUrl
-                  : userDetails?.profileImgUrl
-                  ? this.baseApiUrl + userDetails.profileImgUrl
+                profileImgUrl
+                  ? profileImgUrl
                   : 'https://cdn-icons.flaticon.com/png/512/1144/premium/1144760.png?token=exp=1649739593~hmac=230231ac8bf7359fd8a751a51d3bff3e'
               "
               style="width: 120px; height: 120px; border-radius: 50%"
@@ -118,9 +117,6 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
         <button type="button" (click)="onSaveChanges()" class="btn btn-primary">
           Save changes
         </button>
