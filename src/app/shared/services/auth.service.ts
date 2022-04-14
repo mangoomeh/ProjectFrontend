@@ -21,13 +21,12 @@ export class AuthService {
   getDecodedJWT() {
     const token = this.getToken();
     const decodedJWT = JSON.parse(window.atob(token?.split('.')[1]));
-    console.log(decodedJWT);
     return decodedJWT;
   }
 
   getUserId() {
     const decodedJWT = this.getDecodedJWT();
-    return decodedJWT.UserId;
+    return Number(decodedJWT.UserId);
   }
 
   getUserRole() {
