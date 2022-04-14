@@ -19,12 +19,13 @@ export class BlogEditorComponent implements OnInit {
   public blogForm!: FormGroup;
   public blogImgFile: any;
   public blogContent: string = '';
-  public blogDetails: any = {
+  public blogDetails = {
     id: 0,
     userId: 0,
     title: '',
     description: '',
     content: '',
+    blogImgUrl: '',
     isVisible: true,
   };
 
@@ -105,7 +106,7 @@ export class BlogEditorComponent implements OnInit {
     this.blogDetails.title = this.blogForm.value.title;
     this.blogDetails.description = this.blogForm.value.description;
     this.blogDetails.content = this.blogContent;
-    console.log(this.blogDetails);
+    this.blogDetails.blogImgUrl = this.fetchedBlogObj.blogImgUrl;
     const formData = new FormData();
     formData.append('BlogDetails', JSON.stringify(this.blogDetails));
     formData.append('BlogImage', this.blogImgFile);
@@ -119,7 +120,7 @@ export class BlogEditorComponent implements OnInit {
 
   onDelete() {
     this.blogService.deleteBlog(this.blogId);
-    alert("Blog deleted!")
-    this.router.navigate(['/blog'])
+    alert('Blog deleted!');
+    this.router.navigate(['/blog']);
   }
 }
