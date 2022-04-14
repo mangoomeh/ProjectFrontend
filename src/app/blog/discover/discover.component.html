@@ -1,35 +1,38 @@
-<div class="m-5">
-  <div class="card mb-4">
-    <div class="card-header">Featured</div>
+<div class="container mt-5 p-5 bg-light rounded-3">
+  <div class="card mb-4 containerbg" *ngFor="let blog of blogList">
     <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">
-        With supporting text below as a natural lead-in to additional content.
-      </p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <div class="mb-2">
+        <img
+          [src]="
+            blog.user.profileImgUrl
+              ? baseApiUrl + '/' + blog.user.profileImgUrl
+              : 'https://cdn-icons-png.flaticon.com/512/847/847969.png'
+          "
+          style="width: 25px; height: 25px; border-radius: 50%"
+        />
+        <span class="ms-2" style="font-size: 13px">{{
+          blog.user.fullName
+        }}</span>
+      </div>
+      <div
+        routerLink="/blog/one/{{ blog.id }}"
+        class="d-flex justify-content-between"
+        style="cursor: pointer"
+      >
+        <div>
+          <h5 class="card-title" style="font-weight: 750">{{ blog.title }}</h5>
+          <h6>{{ blog.description }}</h6>
+          <p class="card-text" [innerHTML]="blog.content.slice(0, 30)"></p>
+        </div>
+        <img
+          *ngIf="blog.blogImgUrl"
+          [src]="baseApiUrl + '/' + blog.blogImgUrl"
+          style="width: 100px; height: 100px"
+        />
+      </div>
     </div>
-    <div class="card-footer text-muted">2 days ago</div>
-  </div>
-  <div class="card mb-4">
-    <div class="card-header">Featured</div>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">
-        With supporting text below as a natural lead-in to additional content.
-      </p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="card-footer text-muted" style="font-size: 13px">
+      {{ dateParser(blog.updatedTime, blog.createdTime) }}
     </div>
-    <div class="card-footer text-muted">2 days ago</div>
-  </div>
-  <div class="card mb-4">
-    <div class="card-header">Featured</div>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">
-        With supporting text below as a natural lead-in to additional content.
-      </p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-    <div class="card-footer text-muted">2 days ago</div>
   </div>
 </div>

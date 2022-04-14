@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { BaseService } from 'src/app/shared/services/base.service';
 import { BlogService } from 'src/app/shared/services/blog.service';
 
@@ -18,6 +19,14 @@ export class BlogEditorComponent implements OnInit {
   public blogForm!: FormGroup;
   public blogImgFile: any;
   public blogContent: string = '';
+  public blogDetails: any = {
+    id: 0,
+    userId: 0,
+    title: '',
+    description: '',
+    content: '',
+    isVisible: true,
+  };
 
   // misc
   public blogImgUrl: string | ArrayBuffer | null = '';
@@ -28,7 +37,9 @@ export class BlogEditorComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private blogService: BlogService,
-    private baseService: BaseService
+    private baseService: BaseService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -39,16 +50,20 @@ export class BlogEditorComponent implements OnInit {
     this.blogId = Number(this.route.snapshot.paramMap.get('id'));
     this.getBlog();
   }
-  
+
   getBlog() {
     this.blogService.getBlog(this.blogId).subscribe({
       next: (res) => {
-        console.log(res);
         this.fetchedBlogObj = res;
+        if (res.userId !== Number(this.authService.getUserId())) {
+          alert('You have no rights to edit this blog!');
+          this.router.navigate(['/blog']);
+        }
         this.blogForm.controls['title'].setValue(res.title);
         this.blogForm.controls['description'].setValue(res.description);
+        this.blogContent = res.content;
         if (res.blogImgUrl) {
-          this.blogImgUrl = this.baseService.baseApiUrl + res.blogImgUrl;
+          this.blogImgUrl = this.baseService.baseApiUrl + '/' + res.blogImgUrl;
         }
       },
     });
@@ -85,15 +100,26 @@ export class BlogEditorComponent implements OnInit {
       alert('Invalid title or description');
       return;
     }
+    this.blogDetails.id = this.blogId;
+    this.blogDetails.userId = this.authService.getUserId();
+    this.blogDetails.title = this.blogForm.value.title;
+    this.blogDetails.description = this.blogForm.value.description;
+    this.blogDetails.content = this.blogContent;
+    console.log(this.blogDetails);
     const formData = new FormData();
-    formData.append('BlogDetails', JSON.stringify(this.blogForm.value));
+    formData.append('BlogDetails', JSON.stringify(this.blogDetails));
     formData.append('BlogImage', this.blogImgFile);
     this.blogService.updateBlog(formData).subscribe({
       next: (res) => {
-        console.log(res);
         alert('Saved!');
         this.getBlog();
       },
     });
+  }
+
+  onDelete() {
+    this.blogService.deleteBlog(this.blogId);
+    alert("Blog deleted!")
+    this.router.navigate(['/blog'])
   }
 }

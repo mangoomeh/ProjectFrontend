@@ -27,4 +27,9 @@ export class BlogService {
   updateBlog(formData: any) {
     return this.http.put<any>(this.baseApiUrl, formData);
   }
+
+  deleteBlog(id: number) {
+    return this.http.delete<any>(this.baseApiUrl + `/${id}`);
+  }
+
 }

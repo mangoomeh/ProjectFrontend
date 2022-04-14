@@ -1,9 +1,14 @@
 <div class="container p-5">
-  <form>
-    <input class="form-control col-12 mb-4" placeholder="Title" />
+  <form [formGroup]="blogForm">
+    <input
+      class="form-control col-12 mb-4"
+      placeholder="Title"
+      formControlName="title"
+    />
     <textarea
       class="form-control col-12 mb-4"
       placeholder="Description"
+      formControlName="description"
     ></textarea>
     <img
       [src]="
@@ -23,4 +28,8 @@
   </form>
 
   <ckeditor [(ngModel)]="blogContent" [editor]="Editor"></ckeditor>
+  <div class="mt-2">
+    <button class="btn btn-dark me-2" (click)="onSaveChanges()">Save Post</button>
+    <button class="btn btn-danger" (click)="onDelete()">Delete Post</button>
+  </div>
 </div>

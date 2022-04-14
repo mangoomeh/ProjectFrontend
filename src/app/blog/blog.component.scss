@@ -1,6 +1,6 @@
 .sidebar {
   position: absolute;
-  left: -250px;
+  left: -220px;
   top: 0;
   transition: transform .5s;
 }
@@ -13,9 +13,9 @@
 }
 
 .open-content {
-  margin-left: 250px;
+  margin-left: 220px;
 }
 
 .open-sidebar {
-  transform: translate(250px);
+  transform: translate(220px);
 }
