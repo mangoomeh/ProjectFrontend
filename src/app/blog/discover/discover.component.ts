@@ -19,7 +19,6 @@ export class DiscoverComponent implements OnInit {
     this.baseApiUrl = this.baseService.baseApiUrl;
     this.blogService.getBlogs().subscribe({
       next: (res) => {
-        console.log(res);
         this.blogList = res;
       },
     });
