@@ -38,7 +38,6 @@ export class OneBlogComponent implements OnInit {
       .getBlog(Number(this.route.snapshot.paramMap.get('id')))
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.blogDetails = res;
           this.isAuthor = res.userId === this.authService.getUserId();
         },
@@ -51,13 +50,15 @@ export class OneBlogComponent implements OnInit {
   }
 
   postComment() {
+    if (!this.comment) {
+      return;
+    }
     this.commentObj.content = this.comment;
     this.commentObj.userId = this.authService.getUserId();
     this.commentObj.blogId = this.blogDetails.id;
     this.blogService.postComment(this.commentObj).subscribe({
       next: (res) => {
         this.comment = '';
-        console.log(res);
         this.getBlog();
       },
     });
