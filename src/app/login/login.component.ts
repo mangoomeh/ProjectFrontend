@@ -29,10 +29,8 @@ export class LoginComponent implements OnInit {
     event.preventDefault();
     this.validated = true;
     if (this.loginForm.valid) {
-      console.log('loginForm.value', this.loginForm.value);
       this.authService.login(this.loginForm.value).subscribe({
         next: (res) => {
-          console.log(res);
           localStorage.setItem('jwt_token', res.token);
           this.router.navigate(['/blog']);
         },
