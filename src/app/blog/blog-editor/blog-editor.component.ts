@@ -28,6 +28,7 @@ export class BlogEditorComponent implements OnInit {
     blogImgUrl: '',
     isVisible: true,
   };
+  public isBlogPrivate: boolean = false;
 
   // misc
   public blogImgUrl: string | ArrayBuffer | null = '';
@@ -62,6 +63,7 @@ export class BlogEditorComponent implements OnInit {
         }
         this.blogForm.controls['title'].setValue(res.title);
         this.blogForm.controls['description'].setValue(res.description);
+        this.isBlogPrivate = !res.isVisible;
         this.blogContent = res.content;
         if (res.blogImgUrl) {
           this.blogImgUrl = this.baseService.baseApiUrl + '/' + res.blogImgUrl;
@@ -107,6 +109,7 @@ export class BlogEditorComponent implements OnInit {
     this.blogDetails.description = this.blogForm.value.description;
     this.blogDetails.content = this.blogContent;
     this.blogDetails.blogImgUrl = this.fetchedBlogObj.blogImgUrl;
+    this.blogDetails.isVisible = !this.isBlogPrivate;
     const formData = new FormData();
     formData.append('BlogDetails', JSON.stringify(this.blogDetails));
     formData.append('BlogImage', this.blogImgFile);
@@ -119,7 +122,9 @@ export class BlogEditorComponent implements OnInit {
   }
 
   onDelete() {
-    this.blogService.deleteBlog(this.blogId);
+    this.blogService.deleteBlog(this.blogId).subscribe({
+      next: (res) => {},
+    });
     alert('Blog deleted!');
     this.router.navigate(['/blog']);
   }
