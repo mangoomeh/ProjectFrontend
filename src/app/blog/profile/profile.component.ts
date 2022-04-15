@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
   editUserForm!: FormGroup;
   profileImgFile: any;
   profileImgUrl: string | ArrayBuffer | null = '';
-  baseApiUrl: string = ""
+  baseApiUrl: string = '';
   fetchedUserObj: any;
   roleName: string = '';
   userObj = {
@@ -36,15 +36,17 @@ export class ProfileComponent implements OnInit {
     });
     this.getUserDetails();
     this.roleName = this.authService.getUserRole();
-    this.baseApiUrl = this.baseService.baseApiUrl + "/"
+    this.baseApiUrl = this.baseService.baseApiUrl + '/';
   }
 
   getUserDetails() {
     this.userService.getUser(this.authService.getUserId()).subscribe({
       next: (res) => {
         this.fetchedUserObj = res;
-        this.profileImgUrl =
-          this.baseService.baseApiUrl + '/' + res.profileImgUrl;
+        if (res.profileImgUrl) {
+          this.profileImgUrl =
+            this.baseService.baseApiUrl + '/' + res.profileImgUrl;
+        }
         this.editUserForm.controls['fullName'].setValue(res.fullName);
         this.editUserForm.controls['email'].setValue(res.email);
       },
