@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { IsLoggedInGuard } from './shared/guards/is-logged-in.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   {
     path: 'blog',
     loadChildren: () => import('./blog/blog.module').then((m) => m.BlogModule),
+    canActivate: [IsLoggedInGuard],
   },
 ];
 

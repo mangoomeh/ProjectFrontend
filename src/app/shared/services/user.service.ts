@@ -22,4 +22,8 @@ export class UserService {
   updateUser(id: number, formData: any) {
     return this.http.put<any>(this.baseApiUrl + `/${id}`, formData);
   }
+
+  changePassword(id: number, passwordChangeObj: any) {
+    return this.http.put<any>(this.baseApiUrl + `/${id}/changePassword`, passwordChangeObj);
+  }
 }

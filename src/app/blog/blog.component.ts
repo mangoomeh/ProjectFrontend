@@ -10,11 +10,16 @@ import { BlogService } from '../shared/services/blog.service';
 })
 export class BlogComponent implements OnInit {
   public sideBarIsOpen: boolean = false;
+  public isBlogger: boolean = false;
   constructor(
     private router: Router,
     private blogService: BlogService,
     private authService: AuthService
   ) {}
+
+  ngOnInit(): void {
+    this.isBlogger = this.authService.isBlogger();
+  }
 
   toggleSideBar() {
     this.sideBarIsOpen = !this.sideBarIsOpen;
@@ -42,6 +47,4 @@ export class BlogComponent implements OnInit {
         },
       });
   }
-
-  ngOnInit(): void {}
 }

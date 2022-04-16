@@ -10,17 +10,18 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  editUserForm!: FormGroup;
-  profileImgFile: any;
-  profileImgUrl: string | ArrayBuffer | null = '';
-  baseApiUrl: string = '';
-  fetchedUserObj: any;
-  roleName: string = '';
-  userObj = {
+  public editUserForm!: FormGroup;
+  public profileImgFile: any;
+  public profileImgUrl: string | ArrayBuffer | null = '';
+  public baseApiUrl: string = '';
+  public fetchedUserObj: any;
+  public roleName: string = '';
+  public userObj = {
     fullName: '',
     email: '',
     profileImgUrl: '',
   };
+  public changePasswordForm!: FormGroup;
 
   constructor(
     private userService: UserService,
@@ -33,6 +34,10 @@ export class ProfileComponent implements OnInit {
     this.editUserForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       email: ['', Validators.compose([Validators.email, Validators.required])],
+    });
+    this.changePasswordForm = this.formBuilder.group({
+      oldPassword: ['', Validators.required],
+      newPassword: ['', Validators.required],
     });
     this.getUserDetails();
     this.roleName = this.authService.getUserRole();
@@ -54,7 +59,6 @@ export class ProfileComponent implements OnInit {
   }
 
   loadProfileImage(event: any) {
-    const maxSize = 100000;
     if (!event.target.files[0] || event.target.files[0].length === 0) {
       return;
     }
@@ -64,11 +68,6 @@ export class ProfileComponent implements OnInit {
       alert('Invalid image file');
       return;
     }
-
-    // if (file.size > maxSize) {
-    //   alert(`Max size should be ${maxSize / 1000}kb`);
-    //   return;
-    // }
 
     this.profileImgFile = file;
 
@@ -96,6 +95,25 @@ export class ProfileComponent implements OnInit {
         next: (res) => {
           this.getUserDetails();
           document.getElementById('close-modal')?.click();
+        },
+      });
+  }
+
+  onSubmitPassword() {
+    if (!this.changePasswordForm.valid) {
+      alert('password invalid');
+      return;
+    }
+    this.userService
+      .changePassword(
+        this.authService.getUserId(),
+        this.changePasswordForm.value
+      )
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          alert('password changed!');
+          document.getElementById('passwordChangeModel-close')?.click();
         },
       });
   }

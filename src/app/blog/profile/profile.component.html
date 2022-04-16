@@ -25,13 +25,18 @@
         data-bs-toggle="modal"
         data-bs-target="#editUser"
       >
-        Edit
+        Edit Profile
       </button>
+      <button
+        class="btn btn-outline-danger ms-2"
+        data-bs-toggle="modal"
+        data-bs-target="#changePassword"
+      >Change Password</button>
     </div>
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Edit Profile Modal -->
 <div
   class="modal fade"
   id="editUser"
@@ -103,22 +108,68 @@
             />
             <div class="invalid-feedback">This field is required.</div>
           </div>
-          <!-- <div class="col-md-12">
-            <input
-              formControlName="password"
-              type="password"
-              class="form-control"
-              id="password"
-              placeholder="Password"
-              required
-            />
-            <div class="invalid-feedback">This field is required.</div>
-          </div> -->
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" (click)="onSaveChanges()" class="btn btn-primary">
+        <button type="button" (click)="onSaveChanges()" class="btn btn-dark">
           Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Change Password Modal -->
+<div
+  class="modal fade"
+  id="changePassword"
+  tabindex="-1"
+  aria-labelledby="changePassword"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="changePasswordModalLabel">Update Profile</h5>
+        <button
+          id="passwordChangeModal-close"
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="needs-validation row g-3"
+          [formGroup]="changePasswordForm"
+          novalidate
+        >
+          <div class="col-md-12">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Old Password"
+              required
+              formControlName="oldPassword"
+            />
+            <div class="invalid-feedback">This field is required.</div>
+          </div>
+          <div class="col-md-12">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="New Password"
+              required
+              formControlName="newPassword"
+            />
+            <div class="invalid-feedback">This field is required.</div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="onSubmitPassword()" class="btn btn-dark">
+          Confirm Password Change
         </button>
       </div>
     </div>

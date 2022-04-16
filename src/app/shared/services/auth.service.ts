@@ -7,15 +7,20 @@ import { BaseService } from './base.service';
 })
 export class AuthService {
   baseApiUrl: string;
-  constructor(
-    private http: HttpClient,
-    private baseService: BaseService,
-  ) {
+  constructor(private http: HttpClient, private baseService: BaseService) {
     this.baseApiUrl = baseService.baseApiUrl + '/api/Auth';
   }
 
   login(loginObj: any) {
     return this.http.post<any>(this.baseApiUrl + '/login', loginObj);
+  }
+
+  isLoggedIn() {
+    return !!localStorage.getItem('jwt_token');
+  }
+
+  isBlogger() {
+    return this.getUserRole() === 'Blogger';
   }
 
   getDecodedJWT() {

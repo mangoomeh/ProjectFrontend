@@ -12,7 +12,11 @@
     <button routerLink="profile" class="btn btn-outline-light w-100 mb-3">
       Profile
     </button>
-    <button routerLink="myBlogs" class="btn btn-outline-light w-100 mb-3">
+    <button
+      *ngIf="isBlogger"
+      routerLink="myBlogs"
+      class="btn btn-outline-light w-100 mb-3"
+    >
       My Blogs
     </button>
   </div>
@@ -27,7 +31,11 @@
       <span class="navbar-brand m-4">da.gloB</span>
     </div>
     <div>
-      <button (click)="createNewBlogPost()" class="btn btn-success me-3">
+      <button
+        *ngIf="isBlogger"
+        (click)="createNewBlogPost()"
+        class="btn btn-success me-3"
+      >
         Create New Post
       </button>
       <button (click)="logout()" class="btn btn-outline-light">Logout</button>

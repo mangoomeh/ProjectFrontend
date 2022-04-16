@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { IsBloggerGuard } from '../shared/guards/is-blogger.guard';
 import { BlogEditorComponent } from './blog-editor/blog-editor.component';
 import { BlogComponent } from './blog.component';
 import { DiscoverComponent } from './discover/discover.component';
@@ -15,9 +16,17 @@ const routes: Routes = [
       { path: '', redirectTo: 'discover', pathMatch: 'full' },
       { path: 'discover', component: DiscoverComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'blogEditor/:id', component: BlogEditorComponent },
+      {
+        path: 'blogEditor/:id',
+        component: BlogEditorComponent,
+        canActivate: [IsBloggerGuard],
+      },
       { path: 'one/:id', component: OneBlogComponent },
-      { path: 'myBlogs', component: MyBlogsComponent}
+      {
+        path: 'myBlogs',
+        component: MyBlogsComponent,
+        canActivate: [IsBloggerGuard],
+      },
     ],
   },
 ];
