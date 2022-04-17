@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BaseService } from './base.service';
 
 @Injectable({
@@ -9,6 +9,15 @@ export class AuthService {
   baseApiUrl: string;
   constructor(private http: HttpClient, private baseService: BaseService) {
     this.baseApiUrl = baseService.baseApiUrl + '/api/Auth';
+  }
+
+  httpOptionsProvider() {
+    const options = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + this.getToken(),
+      }),
+    };
+    return options;
   }
 
   login(loginObj: any) {
