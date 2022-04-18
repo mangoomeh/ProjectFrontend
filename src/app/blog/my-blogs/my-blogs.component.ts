@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { BaseService } from 'src/app/shared/services/base.service';
 import { BlogService } from 'src/app/shared/services/blog.service';
@@ -13,24 +14,31 @@ export class MyBlogsComponent implements OnInit {
   public blogList: any[] = [];
   public baseApiUrl: string = '';
   public fetchedUserObj: any;
+  public isUser: boolean = false;
+
   constructor(
     private blogService: BlogService,
     private baseService: BaseService,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.baseApiUrl = this.baseService.baseApiUrl;
-    this.blogService.getBlogByUserId(this.authService.getUserId()).subscribe({
-      next: (res) => {
-        this.blogList = res;
-      },
-    });
-    this.userService.getUser(this.authService.getUserId()).subscribe({
-      next: (res) => {
-        this.fetchedUserObj = res;
-      },
+    this.route.paramMap.subscribe((paramMap) => {
+      const routeId = Number(paramMap.get('id'));
+      this.isUser = routeId === this.authService.getUserId();
+      this.userService.getUser(routeId).subscribe({
+        next: (res) => {
+          this.fetchedUserObj = res;
+        },
+      });
+      this.blogService.getBlogByUserId(routeId).subscribe({
+        next: (res) => {
+          this.blogList = res;
+        },
+      });
     });
   }
 

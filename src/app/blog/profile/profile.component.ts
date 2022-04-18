@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { BaseService } from 'src/app/shared/services/base.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -10,11 +11,20 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  // user
+  public userId: number = -1;
+
+  // page information
+  public routeId: number = -1;
+
+  // fetched Data
+  public fetchedUserObj: any;
+
+  // edit user
   public editUserForm!: FormGroup;
   public profileImgFile: any;
   public profileImgUrl: string | ArrayBuffer | null = '';
   public baseApiUrl: string = '';
-  public fetchedUserObj: any;
   public roleName: string = '';
   public userObj = {
     fullName: '',
@@ -27,10 +37,16 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private baseService: BaseService
+    private baseService: BaseService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.userId = this.authService.getUserId();
+    this.route.paramMap.subscribe((paramMap) => {
+      this.routeId = Number(paramMap.get('id'));
+      this.getUserDetails();
+    });
     this.editUserForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       email: ['', Validators.compose([Validators.email, Validators.required])],
@@ -39,13 +55,12 @@ export class ProfileComponent implements OnInit {
       oldPassword: ['', Validators.required],
       newPassword: ['', Validators.required],
     });
-    this.getUserDetails();
     this.roleName = this.authService.getUserRole();
     this.baseApiUrl = this.baseService.baseApiUrl + '/';
   }
 
   getUserDetails() {
-    this.userService.getUser(this.authService.getUserId()).subscribe({
+    this.userService.getUser(this.routeId).subscribe({
       next: (res) => {
         this.fetchedUserObj = res;
         if (res.profileImgUrl) {

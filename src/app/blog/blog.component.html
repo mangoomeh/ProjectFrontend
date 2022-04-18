@@ -9,15 +9,8 @@
     >
       Discover
     </button>
-    <button routerLink="profile" class="btn btn-outline-light w-100 mb-3">
+    <button routerLink="profile/{{userId}}" class="btn btn-outline-light w-100 mb-3">
       Profile
-    </button>
-    <button
-      *ngIf="isBlogger"
-      routerLink="myBlogs"
-      class="btn btn-outline-light w-100 mb-3"
-    >
-      My Blogs
     </button>
   </div>
 </div>

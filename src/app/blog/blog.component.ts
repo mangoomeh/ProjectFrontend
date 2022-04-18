@@ -11,6 +11,7 @@ import { BlogService } from '../shared/services/blog.service';
 export class BlogComponent implements OnInit {
   public sideBarIsOpen: boolean = false;
   public isBlogger: boolean = false;
+  public userId: number = -1;
   constructor(
     private router: Router,
     private blogService: BlogService,
@@ -19,6 +20,7 @@ export class BlogComponent implements OnInit {
 
   ngOnInit(): void {
     this.isBlogger = this.authService.isBlogger();
+    this.userId = this.authService.getUserId();
   }
 
   toggleSideBar() {

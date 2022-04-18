@@ -13,14 +13,16 @@
               "
               style="width: 25px; height: 25px; border-radius: 50%"
             />
-            <span class="ms-2" style="font-size: 13px">{{
-              blog.user.fullName
-            }}</span>
+            <span
+              class="ms-2 info"
+              style="font-size: 13px"
+              routerLink="/blog/profile/{{ blog.user.id }}"
+              >{{ blog.user.fullName }}</span
+            >
           </div>
           <div
             routerLink="/blog/one/{{ blog.id }}"
-            class="d-flex justify-content-between"
-            style="cursor: pointer"
+            class="d-flex justify-content-between info align-items-center"
           >
             <div>
               <h5 class="card-title" style="font-weight: 750">
@@ -32,7 +34,13 @@
             <img
               *ngIf="blog.blogImgUrl"
               [src]="baseApiUrl + '/' + blog.blogImgUrl"
-              style="width: 100px; height: 100px"
+              style="
+                width: 100px;
+                height: 100px;
+                margin-left: 20px;
+                margin-right: 20px;
+                object-fit: cover;
+              "
             />
           </div>
         </div>

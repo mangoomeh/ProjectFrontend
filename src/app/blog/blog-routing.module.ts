@@ -15,18 +15,13 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'discover', pathMatch: 'full' },
       { path: 'discover', component: DiscoverComponent },
-      { path: 'profile', component: ProfileComponent },
+      { path: 'profile/:id', component: ProfileComponent },
       {
         path: 'blogEditor/:id',
         component: BlogEditorComponent,
         canActivate: [IsBloggerGuard],
       },
       { path: 'one/:id', component: OneBlogComponent },
-      {
-        path: 'myBlogs',
-        component: MyBlogsComponent,
-        canActivate: [IsBloggerGuard],
-      },
     ],
   },
 ];

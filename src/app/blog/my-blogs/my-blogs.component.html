@@ -1,23 +1,21 @@
-<div class="container p-5">
-  <div class="container p-5 bg-white rounded-3">
-    <!-- user info -->
-    <div class="d-flex align-items-center mb-5">
-      <img
-        [src]="
-          fetchedUserObj?.profileImgUrl
-            ? baseApiUrl + '/' + fetchedUserObj?.profileImgUrl
-            : 'https://cdn-icons-png.flaticon.com/512/847/847969.png'
-        "
-        style="width: 50px; height: 50px; border-radius: 50%"
-      />
-      <div class="ms-3">
-        <h3>
-          {{ fetchedUserObj?.fullName }}'s Posts
-        </h3>
-      </div>
+<div class="container p-5 bg-white rounded-3 mt-5">
+  <!-- user info -->
+  <div class="d-flex align-items-center mb-2">
+    <!-- <img
+      [src]="
+        fetchedUserObj?.profileImgUrl
+          ? baseApiUrl + '/' + fetchedUserObj?.profileImgUrl
+          : 'https://cdn-icons-png.flaticon.com/512/847/847969.png'
+      "
+      style="width: 50px; height: 50px; border-radius: 50%"
+    /> -->
+    <div>
+      <h3>{{ fetchedUserObj?.fullName }}'s Posts</h3>
     </div>
-    <!-- end of user -->
-    <div class="card mb-4 containerbg" *ngFor="let blog of blogList">
+  </div>
+  <!-- end of user -->
+  <ng-container *ngFor="let blog of blogList">
+    <div class="card mb-4 containerbg" *ngIf="isUser ? true : blog.isVisible">
       <div class="card-body">
         <div class="mb-2">
           <img
@@ -50,7 +48,13 @@
           <img
             *ngIf="blog.blogImgUrl"
             [src]="baseApiUrl + '/' + blog.blogImgUrl"
-            style="width: 100px; height: 100px"
+            style="
+              width: 100px;
+              height: 100px;
+              margin-left: 20px;
+              margin-right: 20px;
+              object-fit: cover;
+            "
           />
         </div>
       </div>
@@ -58,5 +62,5 @@
         {{ dateParser(blog.updatedTime, blog.createdTime) }}
       </div>
     </div>
-  </div>
+  </ng-container>
 </div>
