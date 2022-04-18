@@ -33,6 +33,7 @@
         </div>
       </div>
     </div>
+
     <!-- blog content -->
     <div class="mt-4 border-bottom">
       <h1>{{ blogDetails?.title }}</h1>
@@ -46,6 +47,7 @@
       />
       <div class="mb-5" [innerHTML]="blogDetails?.content"></div>
     </div>
+
     <!-- comment section -->
     <div class="mt-4">
       <form (submit)="postComment()">
@@ -59,21 +61,59 @@
       <div>Comments:</div>
       <div class="card mb-2" *ngFor="let comment of blogDetails?.comments">
         <div class="card-body">
-          <div class="mb-2">
-            <img
-              [src]="
-                comment.user.profileImgUrl
-                  ? baseApiUrl + '/' + comment?.user.profileImgUrl
-                  : 'https://cdn-icons-png.flaticon.com/512/847/847969.png'
-              "
-              style="width: 25px; height: 25px; border-radius: 50%"
-            />
-            <span class="ms-2" style="font-size: 13px">{{
-              comment.user.fullName
-            }}</span>
+          <div class="mb-2 d-flex justify-content-between">
+            <div>
+              <img
+                [src]="
+                  comment.user.profileImgUrl
+                    ? baseApiUrl + '/' + comment?.user.profileImgUrl
+                    : 'https://cdn-icons-png.flaticon.com/512/847/847969.png'
+                "
+                style="width: 25px; height: 25px; border-radius: 50%"
+              />
+              <span class="ms-2" style="font-size: 13px">{{
+                comment.user.fullName
+              }}</span>
+            </div>
+            <div *ngIf="comment?.user.id === userId">
+              <i
+                class="fa-regular fa-pen-to-square"
+                style="cursor: pointer"
+                data-bs-toggle="modal"
+                data-bs-target="#editComment"
+                (click)="onEditComment(comment)"
+              ></i>
+            </div>
           </div>
           <div>{{ comment.content }}</div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit comment modal -->
+<div class="modal fade" tabindex="-1" id="editComment">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Comment</h5>
+        <button
+          id="close-editComment"
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <input class="form-control" [(ngModel)]="editedComment" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="editComment()" class="btn btn-dark">
+          Save changes
+        </button>
+        <button class="btn btn-outline-danger" (click)="deleteComment()">Delete</button>
       </div>
     </div>
   </div>

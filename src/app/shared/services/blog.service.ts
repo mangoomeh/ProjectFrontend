@@ -61,11 +61,4 @@ export class BlogService {
     );
   }
 
-  postComment(commentObj: any) {
-    return this.http.post<any>(
-      this.baseService.baseApiUrl + '/api/Comments',
-      commentObj,
-      this.authService.httpOptionsProvider()
-    );
-  }
 }
