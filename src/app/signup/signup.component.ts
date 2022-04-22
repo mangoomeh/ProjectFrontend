@@ -56,7 +56,6 @@ export class SignupComponent implements OnInit {
   }
 
   loadProfileImage(event: any) {
-    const maxSize = 100000;
     if (!event.target.files[0] || event.target.files[0].length === 0) {
       return;
     }
@@ -65,11 +64,6 @@ export class SignupComponent implements OnInit {
     if (file.type.match(/image\/*/) == null) {
       alert('Invalid image file');
       return;
-    }
-
-    if (file.size > maxSize) {
-      alert(`Max size should be ${maxSize / 1000}kb`);
-      // return;
     }
 
     this.imgFile = file;

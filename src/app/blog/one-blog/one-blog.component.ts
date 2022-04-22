@@ -19,11 +19,11 @@ export class OneBlogComponent implements OnInit {
 
   // fetched Comments of Blog
   public comments: any[] = [];
-  public comment: string = '';
   public isAuthor: boolean = false;
   public userId: number = 0;
-
+  
   // postComment
+  public comment: string = '';
   public commentObj: any = {
     content: '',
     userId: '',
