@@ -2,7 +2,7 @@
   <div
     class="container border p-5 position-absolute top-50 start-50 translate-middle"
   >
-    <h1 class="text-center mb-4">da.gloB</h1>
+    <h1 class="text-center mb-4" style="font-weight: 700;">da.gloB</h1>
     <form
       [ngClass]="{ 'was-validated': validated }"
       class="needs-validation form-row"
@@ -18,7 +18,7 @@
           placeholder="Email"
           formControlName="Email"
         />
-        <div class="invalid-feedback">This field is required.</div>
+        <div class="invalid-feedback">Please enter your email.</div>
       </div>
       <div class="mb-3 mt-3">
         <input
@@ -29,12 +29,12 @@
           placeholder="Password"
           formControlName="Password"
         />
-        <div class="invalid-feedback">This field is required.</div>
+        <div class="invalid-feedback">Please enter your password.</div>
       </div>
       <div class="mb-3">
         <button
-          class="btn btn-primary w-100"
-          (click)="onSubmit($event)"
+          class="btn btn-dark w-100"
+          (click)="onSubmit()"
           type="submit"
         >
           Continue

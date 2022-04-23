@@ -25,18 +25,16 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit(event: any) {
-    event.preventDefault();
+  onSubmit() {
     this.validated = true;
-    if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe({
-        next: (res) => {
-          localStorage.setItem('jwt_token', res.token);
-          this.router.navigate(['/blog']);
-        },
-      });
-    } else {
-      alert('Invalid Form');
+    if (!this.loginForm.valid) {
+      return;
     }
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (res) => {
+        localStorage.setItem('jwt_token', res.token);
+        this.router.navigate(['/blog']);
+      },
+    });
   }
 }

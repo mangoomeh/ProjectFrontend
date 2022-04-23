@@ -11,6 +11,7 @@
       <div class="col-sm-12 d-flex justify-content-center">
         <img
           class="img-fluid img-thumbnail"
+          *ngIf="imgUrl"
           [src]="
             imgUrl
               ? imgUrl
@@ -18,7 +19,12 @@
           "
           style="width: 120px; height: 120px; border-radius: 50%"
           alt=""
-        /><br />
+        />
+        <div
+          class="img-fluid img-thumbnail d-flex align-items-center justify-content-center"
+          style="width: 120px; height: 120px; border-radius: 50%; font-size: 60px;"
+        ><i class="fa-solid fa-user"></i></div>
+        <br />
         <div class="form-group">
           <label for="file-input">
             <i class="fa-solid fa-square-pen"></i>
@@ -79,7 +85,7 @@
         </select>
       </div>
       <div class="col-12">
-        <button type="submit" class="btn btn-primary w-100" (click)="signup()">
+        <button type="submit" class="btn btn-dark w-100" (click)="signup()">
           Create account
         </button>
       </div>
